@@ -1,9 +1,8 @@
 package com.unibank.unitech.controller;
 
 
-import com.unibank.unitech.dto.AccountDto;
+import com.unibank.unitech.response.AccountResponse;
 import com.unibank.unitech.service.AccountService;
-import com.unibank.unitech.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,7 @@ public class AccountController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<AccountDto>> getAccounts(@PathVariable Long userId) {
+    public ResponseEntity<List<AccountResponse>> getAccounts(@PathVariable Long userId) {
         return ResponseEntity.ok(accountService.getAccounts(userId));
     }
 

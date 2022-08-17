@@ -1,6 +1,5 @@
 package com.unibank.unitech.service.impl;
 
-import com.unibank.unitech.dto.AuthDto;
 import com.unibank.unitech.model.User;
 import com.unibank.unitech.repository.UserRepository;
 import com.unibank.unitech.request.AuthRequest;

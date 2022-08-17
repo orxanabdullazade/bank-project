@@ -1,12 +1,8 @@
 package com.unibank.unitech.controller;
 
-import com.unibank.unitech.dto.AuthDto;
 import com.unibank.unitech.request.AuthRequest;
 import com.unibank.unitech.service.AuthService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

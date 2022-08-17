@@ -1,13 +1,11 @@
 package com.unibank.unitech.service;
 
-import com.unibank.unitech.dto.AccountDto;
+import com.unibank.unitech.response.AccountResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface AccountService {
-
-
-    List<AccountDto> getAccounts(Long userId);
+    List<AccountResponse> getAccounts(Long userId);
 }
