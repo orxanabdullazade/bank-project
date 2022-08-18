@@ -1,13 +1,12 @@
 package com.unibank.unitech.controller;
 
 
+import com.unibank.unitech.request.TransferRequest;
 import com.unibank.unitech.response.AccountResponse;
 import com.unibank.unitech.service.AccountService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +20,20 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-
-
     @GetMapping("/{userId}")
     public ResponseEntity<List<AccountResponse>> getAccounts(@PathVariable Long userId) {
         return ResponseEntity.ok(accountService.getAccounts(userId));
     }
+
+
+    @PatchMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void transferAccountToAccount(@RequestBody TransferRequest transferRequest)
+    {
+        accountService.transferAccountToAccount(transferRequest);
+    }
+
+
 
 
 

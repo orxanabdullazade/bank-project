@@ -1,15 +1,13 @@
 package com.unibank.unitech.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "accounts")
 @Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,5 +24,6 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
 }

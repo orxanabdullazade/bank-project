@@ -1,5 +1,7 @@
 package com.unibank.unitech.service.impl;
 
+import com.unibank.unitech.exception.CustomNotFoundException;
+import com.unibank.unitech.exception.ErrorCodeEnum;
 import com.unibank.unitech.model.User;
 import com.unibank.unitech.repository.UserRepository;
 import com.unibank.unitech.request.AuthRequest;
@@ -23,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
 
         Optional<User> registeredUser = userRepository.findByPin(authRequest.getPin());
         if (registeredUser.isPresent()) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+             new CustomNotFoundException(ErrorCodeEnum.ALREADY_REGISTERED);
         } else {
             User user=new User();
             user.setPin(authRequest.getPin());
