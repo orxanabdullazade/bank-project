@@ -2,15 +2,14 @@ package com.unibank.unitech.exception;
 
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(CustomNotFoundException.class)
-    public ErrorResponse handleCustomException(CustomNotFoundException customException){
+    @ExceptionHandler(CustomErrorException.class)
+    public ErrorResponse handleCustomException(CustomErrorException customException){
 
         return ErrorResponse.builder()
                  .message(customException.getMessage())

@@ -1,12 +1,12 @@
 package com.unibank.unitech.exception;
 
 
-public class CustomNotFoundException extends RuntimeException {
+public class CustomErrorException extends RuntimeException {
 
     private final int code;
     private final String message;
 
-    public CustomNotFoundException(ErrorCodeEnum errorCodeEnum) {
+    public CustomErrorException(ErrorCodeEnum errorCodeEnum) {
         super(errorCodeEnum.getMessage());
         this.code=errorCodeEnum.getCode();
         this.message=errorCodeEnum.getMessage();

@@ -1,52 +1,54 @@
 package com.unibank.unitech.service.impl;
 
-import com.unibank.unitech.exception.CustomNotFoundException;
+import com.unibank.unitech.exception.CustomErrorException;
 import com.unibank.unitech.exception.ErrorCodeEnum;
 import com.unibank.unitech.model.User;
 import com.unibank.unitech.repository.UserRepository;
 import com.unibank.unitech.request.AuthRequest;
+import com.unibank.unitech.response.BaseResponse;
 import com.unibank.unitech.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 
-@RequiredArgsConstructor
+
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
 
     @Override
-    public void registerUser(AuthRequest authRequest) {
+    public BaseResponse registerUser(AuthRequest authRequest) {
 
         Optional<User> registeredUser = userRepository.findByPin(authRequest.getPin());
         if (registeredUser.isPresent()) {
-             new CustomNotFoundException(ErrorCodeEnum.ALREADY_REGISTERED);
+            throw new CustomErrorException(ErrorCodeEnum.ALREADY_REGISTERED);
         } else {
             User user=new User();
             user.setPin(authRequest.getPin());
             user.setPassword(authRequest.getPassword());
             userRepository.save(user);
+            return BaseResponse
+                    .builder()
+                    .success("true")
+                    .build();
         }
 
     }
 
     @Override
-    public void loginUser(AuthRequest authRequest) {
+    public BaseResponse loginUser(AuthRequest authRequest) {
         Optional<User> loginUser = userRepository.findByPinAndPassword(authRequest.getPin(), authRequest.getPassword());
-        if (!loginUser.isPresent()) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (loginUser.isPresent()) {
+            return BaseResponse
+                    .builder()
+                    .success("true")
+                    .build();
         } else {
-            return;
+            throw new CustomErrorException(ErrorCodeEnum.WRONG_CREDENTIALS);
         }
-////        userService.getAllUsers().stream().map(u -> new UserResponse(u)).toList();
-//        return employeeRepository.findById(id)
-//                .map(employee -> convertToDto(employee))
-//                .orElseThrow(()->new CustomNotFoundException(ErrorCodeEnum.EMPLOYEE_NOT_FOUND));
-      //  return 0;
     }
 }
