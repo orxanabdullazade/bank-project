@@ -1,9 +1,15 @@
 package com.unibank.unitech.request;
 
+import com.unibank.unitech.model.Currency;
 import lombok.*;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -11,9 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 public class CurrencyDto {
 
-    private String base;
-    private String date;
-    List<String> rates;
+     String code;
+     double rate;
 
-
+     public CurrencyDto(Currency currency) {
+          this.code=currency.getCode();
+          this.rate=currency.getRate();
+     }
 }
+
+

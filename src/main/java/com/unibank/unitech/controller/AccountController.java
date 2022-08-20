@@ -24,20 +24,11 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccounts(userId));
     }
 
-
     @PatchMapping
     public ResponseEntity<BaseResponse> transferAccountToAccount(@RequestBody TransferRequest transferRequest)
     {
         return ResponseEntity.ok(accountService.transferAccountToAccount(transferRequest));
     }
-
-
-
-
-
-
-
-
 
 
 }

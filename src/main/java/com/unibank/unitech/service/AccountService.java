@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public interface AccountService {
+
     List<AccountResponse> getAccounts(Long userId);
 
     BaseResponse transferAccountToAccount(TransferRequest transferRequest);
