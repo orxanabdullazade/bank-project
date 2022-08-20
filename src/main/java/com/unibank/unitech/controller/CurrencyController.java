@@ -2,6 +2,7 @@ package com.unibank.unitech.controller;
 
 import com.unibank.unitech.request.CurrencyDto;
 import com.unibank.unitech.response.AccountResponse;
+import com.unibank.unitech.response.CurrencyResponse;
 import com.unibank.unitech.service.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class CurrencyController {
     }
 
     @GetMapping("/{from}/{to}")
-    public ResponseEntity<CurrencyDto> exchangeCurrency(@PathVariable String from,@PathVariable String to) {
+    public ResponseEntity<CurrencyResponse> exchangeCurrency(@PathVariable String from, @PathVariable String to) {
         return ResponseEntity.ok(currencyService.exchangeCurrency(from,to));
     }
 

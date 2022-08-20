@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface CurrencyRepository extends JpaRepository<Currency,Long> {
 
 //      List<Currency> findAllByCreatedDateLessThan(String date);
+       Optional<Currency> findByCode(String code);
 
 }
