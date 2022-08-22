@@ -5,17 +5,15 @@ import com.unibank.unitech.exception.ErrorCodeEnum;
 import com.unibank.unitech.model.Currency;
 import com.unibank.unitech.repository.CurrencyRepository;
 
-import com.unibank.unitech.request.CurrencyDto;
+import com.unibank.unitech.request.CurrencyRequest;
 import com.unibank.unitech.response.CurrencyResponse;
 import com.unibank.unitech.service.CurrencyService;
+import com.unibank.unitech.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 
@@ -24,36 +22,22 @@ import java.util.stream.Collectors;
 public class CurrencyServiceImpl implements CurrencyService {
 
     private final CurrencyRepository currencyRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @Override
-    @Scheduled(cron = "0 0/1 * * * ?")
-    public List<CurrencyDto> currencyRate() {
-//        Date date = new Date(); // This object contains the current date value
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String simpleDateFormat=formatter.format(date);
-//        List<Currency> currencyList=currencyRepository.findAllByCreatedDateLessThan(simpleDateFormat);
+    public List<CurrencyRequest> currencyRate(String bearer) {
+        if ( !jwtTokenUtil.validateToken(bearer)) throw new CustomErrorException(ErrorCodeEnum.UNAUTHORIZED);
 
-        int min = 1;
-        int max = 10;
-        Random random = new Random();
-        int value = random.nextInt(max + min) + min;
+        List<Currency> currencyList=currencyRepository.findAll();
 
-
-        List<Currency> currencyList = currencyRepository.findAll();
-
-        currencyList.forEach(currency -> {
-            currency.setRate(currency.getRate() + value);
-        });
-
-//        return currencyRepository.save(currencyList);
-
-        return currencyList.stream().map(currency -> new CurrencyDto(currency)).collect(Collectors.toList());
+        return currencyList.stream().map(currency -> new CurrencyRequest(currency)).collect(Collectors.toList());
 
     }
 
     @Override
-    public CurrencyResponse exchangeCurrency(String from, String to) {
+    public CurrencyResponse exchangeCurrency(String from, String to,String bearer) {
+        if ( !jwtTokenUtil.validateToken(bearer)) throw new CustomErrorException(ErrorCodeEnum.UNAUTHORIZED);
+
         List<String> codes = new ArrayList<>();
         codes.add("AZN");
         codes.add("TL");
@@ -88,7 +72,7 @@ public class CurrencyServiceImpl implements CurrencyService {
                     .build();
 
         } else {
-            throw new CustomErrorException(ErrorCodeEnum.UNKNOWN_ERROR);
+            throw new CustomErrorException(ErrorCodeEnum.CURRENCY_CODE_NOT_FOUND);
         }
     }
 }

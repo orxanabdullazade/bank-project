@@ -1,14 +1,15 @@
 package com.unibank.unitech.service;
 
 import com.unibank.unitech.request.AuthRequest;
-import com.unibank.unitech.response.BaseResponse;
+import com.unibank.unitech.response.RegisterSuccessResponse;
+import com.unibank.unitech.response.LoginSuccessResponse;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public interface AuthService {
 
-    BaseResponse registerUser(AuthRequest authRequest);
+    RegisterSuccessResponse registerUser(AuthRequest authRequest);
 
-    BaseResponse loginUser(AuthRequest authRequest);
+    LoginSuccessResponse loginUser(AuthRequest authRequest);
 }

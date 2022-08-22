@@ -4,6 +4,8 @@ package com.unibank.unitech.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SignatureException;
+
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
@@ -25,6 +27,16 @@ public class CustomExceptionHandler {
         return ErrorResponse.builder()
                 .message(ex.getMessage())
                 .code(ErrorCodeEnum.UNKNOWN_ERROR.getCode())
+                .build();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value = io.jsonwebtoken.SignatureException.class)
+    public ErrorResponse handleUnauthorized(io.jsonwebtoken.SignatureException ex) {
+
+        return ErrorResponse.builder()
+                .message(ErrorCodeEnum.UNAUTHORIZED.getMessage())
+                .code(ErrorCodeEnum.UNAUTHORIZED.getCode())
                 .build();
     }
 

@@ -15,12 +15,12 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurrencyDto {
+public class CurrencyRequest {
 
      String code;
      double rate;
 
-     public CurrencyDto(Currency currency) {
+     public CurrencyRequest(Currency currency) {
           this.code=currency.getCode();
           this.rate=currency.getRate();
      }

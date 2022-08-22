@@ -1,10 +1,10 @@
 package com.unibank.unitech.controller;
 
-import com.unibank.unitech.request.CurrencyDto;
-import com.unibank.unitech.response.AccountResponse;
+import com.unibank.unitech.request.CurrencyRequest;
 import com.unibank.unitech.response.CurrencyResponse;
 import com.unibank.unitech.service.CurrencyService;
-import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/currency")
+@Tag(name = "Currency Service")
 public class CurrencyController {
 
     private CurrencyService currencyService;
@@ -21,14 +22,16 @@ public class CurrencyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CurrencyDto>> currencyRate()
+    @Operation(summary = "This return currency list")
+    public ResponseEntity<List<CurrencyRequest>> currencyRate(@RequestHeader("Authorization") String bearer)
     {
-        return ResponseEntity.ok(currencyService.currencyRate());
+        return ResponseEntity.ok(currencyService.currencyRate(bearer));
     }
 
     @GetMapping("/{from}/{to}")
-    public ResponseEntity<CurrencyResponse> exchangeCurrency(@PathVariable String from, @PathVariable String to) {
-        return ResponseEntity.ok(currencyService.exchangeCurrency(from,to));
+    public ResponseEntity<CurrencyResponse> exchangeCurrency(@PathVariable String from, @PathVariable String to,
+                                                             @RequestHeader("Authorization") String bearer) {
+        return ResponseEntity.ok(currencyService.exchangeCurrency(from,to,bearer));
     }
 
 

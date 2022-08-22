@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {
 
-    List<Account> findByStatus(int status);
+    List<Account> findByUserIdAndStatus(long user_id,int status);
 
 }

@@ -1,10 +1,12 @@
 package com.unibank.unitech.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Currency {
 
     @Id
@@ -24,7 +27,6 @@ public class Currency {
     private double rate;
 
     @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date CreatedDate;
+    private LocalDateTime createdDate;
 
 }

@@ -9,7 +9,9 @@ public enum ErrorCodeEnum {
     TRANSFER_SAME_ACCOUNT(1004,"transfer to same account"),
     TRANSFER_DEACTIVE_ACCOUNT(1005,"transfer to deactive account"),
     TRANSFER_NON_EXISTING_ACCOUNT(1006,"transfer to non existing account"),
-    NOT_FOUND_ACCOUNT(1007,"not found account");
+    UNAUTHORIZED(1008,"invalid token"),
+    NOT_FOUND_ACCOUNT(1007,"not found account"),
+    CURRENCY_CODE_NOT_FOUND(1009,"currency code is not right");
 
 
 
