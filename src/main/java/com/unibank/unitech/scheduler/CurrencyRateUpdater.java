@@ -23,7 +23,7 @@ public class CurrencyRateUpdater {
         List<Currency> currencyList = currencyRepository.findCurrencyByCreatedDateLessThan(beforeOneMinutes);
 
         double leftLimit = 0.01;
-        double rightLimit = 0.1;
+        double rightLimit = -0.01;
         double generatedDouble = leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
 
         currencyList.forEach(currency -> {

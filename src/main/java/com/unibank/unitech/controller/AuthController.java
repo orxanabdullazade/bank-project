@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @Tag(name = "Auth Service")
 public class AuthController {
-//sha1:128000:72:e5EkD47NIS1f8aLq9RjmMZVs9CgumtjGSQTViP0cDM59m1+ffqbiPDV/hEt9EXPieSPlBsj34t6eWmkR5q9uIEyqVOO43w+V:DRM0sktpxUyyj7WeQFCzNVvs0jBtHrXsxV/xituj4ulhQzVdlQsZE9lWzJ9CIW80C26sPX/OcXPNPRrn0+0k8O89UDwrfCum
+
     public final AuthService authService;
 
     @PostMapping("/register")
