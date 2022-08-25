@@ -9,6 +9,10 @@ import com.unibank.unitech.response.TransferResponse;
 import com.unibank.unitech.util.JwtTokenUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,17 +22,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+//@ExtendWith(MockitoExtension.class)
 class AccountServiceImplTest {
 
     private String token="eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Nj" +
             "EwODQ5MTEsImV4cCI6MTY2MTA4ODUxMSwic3ViIjoiMSJ9.ami9TOUpVJi5X" +
             "dvXrwFE5in_f3EF8Q9cxh-tVK1-6DiWfDHsCfDTDAZ4mY-TrQ49ilDv5e1uCcoxG-BzLH1LtA";
 
-    //@Mock
+  //  @Mock
     private AccountRepository accountRepository;
-    //@Mock
+   // @Mock
     private JwtTokenUtil jwtTokenUtil;
-    // @InjectMocks
+   // @InjectMocks
     private AccountServiceImpl accountService;
 
     @BeforeEach
